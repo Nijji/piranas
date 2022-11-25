@@ -1,12 +1,13 @@
 const express = require('express')
 const router = express.Router()
+const Pirana=require('../models/pirana')
 
-router.get('/', (req,res) =>
+router.get('/piranas', (req,res) =>
 {
-    res.render("index", { title: 'homepage' });
+    res.send('index',{ title: 'homepage' });
 })
-router.get("/galas", (req, res) => {
-  res.render("galas",{title:'galas'});
+router.post("/piranas", (req, res) => {
+ Pirana.create(req.body)
 });
 router.get("/gear", (req, res) => {
   res.render("gear", { title: 'gear' });

@@ -1,5 +1,19 @@
 const mongoose = require('mongoose')
-const Schema = new mongoose.Schema({
+const Schema = mongoose.Schema
+
+const GeoSchema = new Schema(
+  {
+    type: {
+      type: String,
+      default:'Point'
+    },
+    coordinates:{
+      type: [number],
+      index:'2dsphere'
+    }
+  }
+)
+const PiranaSchema = new Schema({
   name: {
     type: String,
     required: true,
@@ -20,10 +34,8 @@ const Schema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  coordinates: {
-    type: String,
-    required: true,
-  },
+  geometry: GeoSchema
 });
 
-const Pirana=mongoose.model(pirana,'')
+const Pirana = mongoose.model('pirana', PiranaSchema)
+module.exports=Pirana
